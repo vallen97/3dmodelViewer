@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class ButtonController : MonoBehaviour
 {
+
+    // TODO: Auto Select the first button and disbale the button
+    // TODO: When another model is selected set orientation back to 0,0
+
     // variables
     // buttons
     private Button btnModel1;
@@ -30,9 +34,14 @@ public class ButtonController : MonoBehaviour
     // list
     private List<GameObject> models;
 
+    // gameObject for model
+    private GameObject go; 
+
     // Start is called before the first frame update
     void Start()
     {
+        go = GameObject.Find("model");
+
         // instanciate list
         models = new List<GameObject>();
 
@@ -52,17 +61,20 @@ public class ButtonController : MonoBehaviour
         txtModelDesc = GameObject.Find("txtModelDesc").GetComponent<Text>();
 
         // add listners
-        btnModel1.onClick.AddListener(() => ModelChange1(1));
-        btnModel2.onClick.AddListener(() => ModelChange1(2));
-        btnModel3.onClick.AddListener(() => ModelChange1(3));
+        btnModel1.onClick.AddListener(() => ModelChange(1));
+        btnModel2.onClick.AddListener(() => ModelChange(2));
+        btnModel3.onClick.AddListener(() => ModelChange(3));
 
         btnModelDesc.onClick.AddListener(DisplayModelDesc);
 
         // hide text
         txtModelDesc.gameObject.SetActive(false);
+
+        // Set model 1 to show when project shows
+        ModelChange(1);
     }
 
-    private void ModelChange1(int modelNumber)
+    private void ModelChange(int modelNumber)
     {
         // set name for active model for setting text
         activeModel = "Model Button: " + modelNumber;
@@ -71,6 +83,14 @@ public class ButtonController : MonoBehaviour
         if (modelNumber == 1)
         {
             StartCoroutine("animateBtnTxtHide");
+
+            // Disbale button and Enable other buttons
+            btnModel1.interactable = false;
+            btnModel2.interactable = true;
+            btnModel3.interactable = true;
+
+            // set rotation back to  0,0,0
+            go.transform.rotation = Quaternion.identity;
 
             // show and hide models
             models[0].gameObject.SetActive(true);
@@ -82,6 +102,14 @@ public class ButtonController : MonoBehaviour
         {
             StartCoroutine("animateBtnTxtHide");
 
+            // Disbale button and Enable other buttons
+            btnModel1.interactable = true;
+            btnModel2.interactable = false;
+            btnModel3.interactable = true;
+
+            // set rotation back to  0,0,0
+            go.transform.rotation = Quaternion.identity;
+
             // show and hide models
             models[1].gameObject.SetActive(true);
             models[2].gameObject.SetActive(false);
@@ -90,6 +118,13 @@ public class ButtonController : MonoBehaviour
         else if (modelNumber == 3)
         {
             StartCoroutine("animateBtnTxtHide");
+            // Disbale button and Enable other buttons
+            btnModel1.interactable = true;
+            btnModel2.interactable = true;
+            btnModel3.interactable = false;
+
+            // set rotation back to  0,0,0
+            go.transform.rotation = Quaternion.identity;
 
             // show and hide models
             models[2].gameObject.SetActive(true);
