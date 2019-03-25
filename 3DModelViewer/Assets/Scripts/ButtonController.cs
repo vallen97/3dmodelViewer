@@ -20,7 +20,7 @@ public class ButtonController : MonoBehaviour
     private int infoPos = 0;
 
     // string 
-    private string[] modelNames = { "model/vase", "model/tulipany", "model/bowl" };
+    private string[] modelNames = { "model/AncientVase", "model/colorvase", "model/bowl" };
 
     // list
     private List<GameObject> models;
