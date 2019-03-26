@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,7 +8,10 @@ public class IdleController : MonoBehaviour
     private GameObject go;
 
     // String 
-    private string[] modelNames = { "model/vase", "model/tulipany", "model/bowl" };
+    //private string[] modelNames = { "model/vase", "model/tulipany", "model/bowl" };
+    private string[] modelNames = { "model/Axe", "model/bronze ring", "model/kettle", "model/owl", "model/pot", "model/spear" };
+
+
     // get model
     private List<GameObject> models;
 
@@ -32,7 +34,12 @@ public class IdleController : MonoBehaviour
 
         int rndModel = Random.Range(0, models.Count);
         models[rndModel].SetActive(true);
+
+        // set color of model
+        models[rndModel].GetComponent<Renderer>().material.color = Color.magenta;
     }
+
+
 
     // Update is called once per frame
     void Update()

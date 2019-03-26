@@ -20,7 +20,8 @@ public class ButtonController : MonoBehaviour
     private int infoPos = 0;
 
     // string 
-    private string[] modelNames = { "model/AncientVase", "model/colorvase", "model/bowl" };
+    //private string[] modelNames = { "model/AncientVase", "model/colorvase", "model/bowl" };
+    private string[] modelNames = { "model/Axe", "model/bronze ring", "model/kettle", "model/owl", "model/pot", "model/spear" };
 
     // list
     private List<GameObject> models;
@@ -97,9 +98,9 @@ public class ButtonController : MonoBehaviour
         modelButtons[1].onClick.AddListener(() => ModelChange(1));
         modelButtons[2].onClick.AddListener(() => ModelChange(2));
         // NOTE: Currently does not have any information
-        //modelButtons[3].onClick.AddListener(() => ModelChange(3));
-        //modelButtons[4].onClick.AddListener(() => ModelChange(4));
-        //modelButtons[5].onClick.AddListener(() => ModelChange(5));
+        modelButtons[3].onClick.AddListener(() => ModelChange(3));
+        modelButtons[4].onClick.AddListener(() => ModelChange(4));
+        modelButtons[5].onClick.AddListener(() => ModelChange(5));
         //modelButtons[6].onClick.AddListener(() => ModelChange(6));
         //modelButtons[7].onClick.AddListener(() => ModelChange(7));
 
@@ -128,6 +129,18 @@ public class ButtonController : MonoBehaviour
             "Where can I get some? There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.",
             "All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures,",
             "to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc."
+        });
+
+        modelDesc.Add(new string[]{
+            "MODEL 4"
+        });
+
+        modelDesc.Add(new string[]{
+            "MODEL 5"
+        });
+
+        modelDesc.Add(new string[]{
+            "MODEL 6"
         });
 
         // hide text
@@ -167,14 +180,19 @@ public class ButtonController : MonoBehaviour
 
     private void DisplayModelDesc()
     {
+        
         // check if text is showing
         if (txtModelDesc.gameObject.activeSelf == false)
         {
             StartCoroutine("animateBtnTxtShow");
+            // mode collider to the left
+            this.GetComponent<BoxCollider>().center = new Vector3(-6, 0, 0);
         }
         else
         {
             StartCoroutine("animateBtnTxtHide");
+            // move collider back to normal
+            this.GetComponent<BoxCollider>().center = new Vector3(0, 0, 0);
         }
 
         // which button was pressed and asign model text
@@ -226,6 +244,12 @@ public class ButtonController : MonoBehaviour
         }
         else if (infoPos <= 0)
         {
+            btnTextB.interactable = false;
+        }
+
+        if(modelDesc[activeModel].Length == 1)
+        {
+            btnTextF.interactable = false;
             btnTextB.interactable = false;
         }
 

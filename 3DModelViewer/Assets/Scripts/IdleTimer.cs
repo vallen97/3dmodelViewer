@@ -18,7 +18,7 @@ public class IdleTimer : MonoBehaviour
 
         //TODO: test if the input touch works in the device that will be put on
 
-        //If any input is registered reset the timercouter
+        ////If any input is registered reset the timercouter
         //if (Input.touches > 1)
         //{
         //    timerCount = 0f;
