@@ -36,7 +36,7 @@ public class IdleController : MonoBehaviour
         models[rndModel].SetActive(true);
 
         // set color of model
-        models[rndModel].GetComponent<Renderer>().material.color = Color.magenta;
+        models[rndModel].GetComponent<Renderer>().material.color = new Color32(190, 188, 169, 255);
     }
 
 
