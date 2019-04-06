@@ -9,7 +9,7 @@ public class IdleController : MonoBehaviour
 
     // String 
     //private string[] modelNames = { "model/vase", "model/tulipany", "model/bowl" };
-    private string[] modelNames = { "model/Axe", "model/bronze ring", "model/kettle", "model/owl", "model/pot", "model/spear" };
+    private string[] modelNames = { "model/Axe", "model/bronze ring", "model/kettle", "model/owl", "model/pot", "model/spear", "model/Axe Head" };
 
 
     // get model

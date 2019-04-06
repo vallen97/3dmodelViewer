@@ -21,7 +21,7 @@ public class ButtonController : MonoBehaviour
 
     // string 
     //private string[] modelNames = { "model/AncientVase", "model/colorvase", "model/bowl" };
-    private string[] modelNames = { "model/Axe", "model/bronze ring", "model/kettle", "model/owl", "model/pot", "model/spear" };
+    private string[] modelNames = { "model/Axe", "model/bronze ring", "model/kettle", "model/owl", "model/pot", "model/spear", "model/Axe Head" };
 
     // list
     private List<GameObject> models;
@@ -101,7 +101,7 @@ public class ButtonController : MonoBehaviour
         modelButtons[3].onClick.AddListener(() => ModelChange(3));
         modelButtons[4].onClick.AddListener(() => ModelChange(4));
         modelButtons[5].onClick.AddListener(() => ModelChange(5));
-        //modelButtons[6].onClick.AddListener(() => ModelChange(6));
+        modelButtons[6].onClick.AddListener(() => ModelChange(6));
         //modelButtons[7].onClick.AddListener(() => ModelChange(7));
 
         // info button
@@ -141,6 +141,10 @@ public class ButtonController : MonoBehaviour
 
         modelDesc.Add(new string[]{
             "MODEL 6"
+        });
+
+        modelDesc.Add(new string[]{
+            "MODEL 7"
         });
 
         // hide text
