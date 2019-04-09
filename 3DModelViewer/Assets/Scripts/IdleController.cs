@@ -9,7 +9,7 @@ public class IdleController : MonoBehaviour
 
     // String 
     //private string[] modelNames = { "model/vase", "model/tulipany", "model/bowl" };
-    private string[] modelNames = { "model/Axe", "model/bronze ring", "model/kettle", "model/owl", "model/pot", "model/spear", "model/Axe Head" };
+    private string[] modelNames = { "model/Axe Head", "model/bronze ring", "model/kettle", "model/owl", "model/pot", "model/spear" };
 
 
     // get model
@@ -35,11 +35,9 @@ public class IdleController : MonoBehaviour
         int rndModel = Random.Range(0, models.Count);
         models[rndModel].SetActive(true);
 
-        // set color of model
-        models[rndModel].GetComponent<Renderer>().material.color = new Color32(190, 188, 169, 255);
+        // set color of model rgba
+        //models[rndModel].GetComponent<Renderer>().material.color = new Color32(190, 188, 169, 255);
     }
-
-
 
     // Update is called once per frame
     void Update()
@@ -47,6 +45,7 @@ public class IdleController : MonoBehaviour
         // Rotate the object around its local X axis at 1 degree per second
         go.transform.Rotate(Vector3.up * (Time.deltaTime * 20));
 
+        // Click the screen to start dext scene
         if (Input.GetMouseButtonDown(0))
         {
             SceneManager.LoadScene("ModeViewerScene");

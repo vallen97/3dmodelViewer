@@ -21,7 +21,7 @@ public class ButtonController : MonoBehaviour
 
     // string 
     //private string[] modelNames = { "model/AncientVase", "model/colorvase", "model/bowl" };
-    private string[] modelNames = { "model/Axe", "model/bronze ring", "model/kettle", "model/owl", "model/pot", "model/spear", "model/Axe Head" };
+    private string[] modelNames = { "model/Axe Head", "model/bronze ring", "model/kettle", "model/owl", "model/pot", "model/spear" };
 
     // list
     private List<GameObject> models;
@@ -101,7 +101,7 @@ public class ButtonController : MonoBehaviour
         modelButtons[3].onClick.AddListener(() => ModelChange(3));
         modelButtons[4].onClick.AddListener(() => ModelChange(4));
         modelButtons[5].onClick.AddListener(() => ModelChange(5));
-        modelButtons[6].onClick.AddListener(() => ModelChange(6));
+        //modelButtons[6].onClick.AddListener(() => ModelChange(6));
         //modelButtons[7].onClick.AddListener(() => ModelChange(7));
 
         // info button
@@ -263,17 +263,18 @@ public class ButtonController : MonoBehaviour
 
     IEnumerator animateBtnTxtShow()
     {
+        int speed = 450;
         // show text
         txtModelDesc.gameObject.SetActive(true);
         // I set up povit points and this is used to animate the button and text 
         while (btnModelDesc.GetComponent<RectTransform>().anchoredPosition.x > -360)
         {
             // move left every .01 seconds
-            btnModelDesc.transform.Translate(Vector3.left * (Time.deltaTime * 300));
-            txtModelDesc.transform.Translate(Vector3.left * (Time.deltaTime * 300));
-            btnTextF.transform.Translate(Vector3.left * (Time.deltaTime * 300));
-            btnTextB.transform.Translate(Vector3.left * (Time.deltaTime * 300));
-            txtPageNum.transform.Translate(Vector3.left * (Time.deltaTime * 300));
+            btnModelDesc.transform.Translate(Vector3.left * (Time.deltaTime * speed));
+            txtModelDesc.transform.Translate(Vector3.left * (Time.deltaTime * speed));
+            btnTextF.transform.Translate(Vector3.left * (Time.deltaTime * speed));
+            btnTextB.transform.Translate(Vector3.left * (Time.deltaTime * speed));
+            txtPageNum.transform.Translate(Vector3.left * (Time.deltaTime * speed));
             yield return new WaitForSecondsRealtime(.01f);
         }
 
@@ -283,15 +284,17 @@ public class ButtonController : MonoBehaviour
 
     IEnumerator animateBtnTxtHide()
     {
+        int speed = 450;
+
         // I set up povit points and this is used to animate the button and text 
         while (btnModelDesc.GetComponent<RectTransform>().anchoredPosition.x < 360)
         {
             // move right every .01 seconds
-            btnModelDesc.transform.Translate(Vector3.right * (Time.deltaTime * 300));
-            txtModelDesc.transform.Translate(Vector3.right * (Time.deltaTime * 300));
-            btnTextF.transform.Translate(Vector3.right * (Time.deltaTime * 300));
-            btnTextB.transform.Translate(Vector3.right * (Time.deltaTime * 300));
-            txtPageNum.transform.Translate(Vector3.right * (Time.deltaTime * 300));
+            btnModelDesc.transform.Translate(Vector3.right * (Time.deltaTime * speed));
+            txtModelDesc.transform.Translate(Vector3.right * (Time.deltaTime * speed));
+            btnTextF.transform.Translate(Vector3.right * (Time.deltaTime * speed));
+            btnTextB.transform.Translate(Vector3.right * (Time.deltaTime * speed));
+            txtPageNum.transform.Translate(Vector3.right * (Time.deltaTime * speed));
             yield return new WaitForSecondsRealtime(.01f);
         }
 
