@@ -184,7 +184,7 @@ public class ButtonController : MonoBehaviour
 
     private void DisplayModelDesc()
     {
-        
+
         // check if text is showing
         if (txtModelDesc.gameObject.activeSelf == false)
         {
@@ -251,7 +251,7 @@ public class ButtonController : MonoBehaviour
             btnTextB.interactable = false;
         }
 
-        if(modelDesc[activeModel].Length == 1)
+        if (modelDesc[activeModel].Length == 1)
         {
             btnTextF.interactable = false;
             btnTextB.interactable = false;
