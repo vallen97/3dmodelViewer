@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\IdleController.cs" />
     <Compile Include="Assets\Scripts\IdleTimer.cs" />
     <Compile Include="Assets\Scripts\ModelController.cs" />
+    <Compile Include="Assets\Scripts\ScreenResolutionController.cs" />
     <Compile Include="Assets\Scripts\TimeourController.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/Vaughn/Highlands/SSD Practicum 2/Unity Projects/3DModelViewer/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

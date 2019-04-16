@@ -18,6 +18,7 @@ public class ButtonController : MonoBehaviour
     // int
     private int activeModel = 100;
     private int infoPos = 0;
+    private int speed = 750; // used for speed on info
 
     // string 
     //private string[] modelNames = { "model/AncientVase", "model/colorvase", "model/bowl" };
@@ -263,7 +264,6 @@ public class ButtonController : MonoBehaviour
 
     IEnumerator animateBtnTxtShow()
     {
-        int speed = 450;
         // show text
         txtModelDesc.gameObject.SetActive(true);
         // I set up povit points and this is used to animate the button and text 
@@ -284,8 +284,6 @@ public class ButtonController : MonoBehaviour
 
     IEnumerator animateBtnTxtHide()
     {
-        int speed = 450;
-
         // I set up povit points and this is used to animate the button and text 
         while (btnModelDesc.GetComponent<RectTransform>().anchoredPosition.x < 360)
         {
