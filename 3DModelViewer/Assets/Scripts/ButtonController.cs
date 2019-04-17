@@ -18,7 +18,10 @@ public class ButtonController : MonoBehaviour
     // int
     private int activeModel = 100;
     private int infoPos = 0;
-    private int speed = 750; // used for speed on info
+    private int moveText = 10;
+
+    // float
+    private float speed = .01625f;
 
     // string 
     //private string[] modelNames = { "model/AncientVase", "model/colorvase", "model/bowl" };
@@ -267,15 +270,15 @@ public class ButtonController : MonoBehaviour
         // show text
         txtModelDesc.gameObject.SetActive(true);
         // I set up povit points and this is used to animate the button and text 
-        while (btnModelDesc.GetComponent<RectTransform>().anchoredPosition.x > -360)
+        while (btnModelDesc.GetComponent<RectTransform>().anchoredPosition.x > -395)
         {
             // move left every .01 seconds
-            btnModelDesc.transform.Translate(Vector3.left * (Time.deltaTime * speed));
-            txtModelDesc.transform.Translate(Vector3.left * (Time.deltaTime * speed));
-            btnTextF.transform.Translate(Vector3.left * (Time.deltaTime * speed));
-            btnTextB.transform.Translate(Vector3.left * (Time.deltaTime * speed));
-            txtPageNum.transform.Translate(Vector3.left * (Time.deltaTime * speed));
-            yield return new WaitForSecondsRealtime(.01f);
+            btnModelDesc.transform.Translate(Vector3.left * (Time.deltaTime * moveText));
+            txtModelDesc.transform.Translate(Vector3.left * (Time.deltaTime * moveText));
+            btnTextF.transform.Translate(Vector3.left * (Time.deltaTime * moveText));
+            btnTextB.transform.Translate(Vector3.left * (Time.deltaTime * moveText));
+            txtPageNum.transform.Translate(Vector3.left * (Time.deltaTime * moveText));
+            yield return new WaitForSecondsRealtime(speed);
         }
 
         //stop coroutine 
@@ -285,15 +288,15 @@ public class ButtonController : MonoBehaviour
     IEnumerator animateBtnTxtHide()
     {
         // I set up povit points and this is used to animate the button and text 
-        while (btnModelDesc.GetComponent<RectTransform>().anchoredPosition.x < 360)
+        while (btnModelDesc.GetComponent<RectTransform>().anchoredPosition.x < 275)
         {
             // move right every .01 seconds
-            btnModelDesc.transform.Translate(Vector3.right * (Time.deltaTime * speed));
-            txtModelDesc.transform.Translate(Vector3.right * (Time.deltaTime * speed));
-            btnTextF.transform.Translate(Vector3.right * (Time.deltaTime * speed));
-            btnTextB.transform.Translate(Vector3.right * (Time.deltaTime * speed));
-            txtPageNum.transform.Translate(Vector3.right * (Time.deltaTime * speed));
-            yield return new WaitForSecondsRealtime(.01f);
+            btnModelDesc.transform.Translate(Vector3.right * (Time.deltaTime * moveText));
+            txtModelDesc.transform.Translate(Vector3.right * (Time.deltaTime * moveText));
+            btnTextF.transform.Translate(Vector3.right * (Time.deltaTime * moveText));
+            btnTextB.transform.Translate(Vector3.right * (Time.deltaTime * moveText));
+            txtPageNum.transform.Translate(Vector3.right * (Time.deltaTime * moveText));
+            yield return new WaitForSecondsRealtime(speed);
         }
 
         // hide text
