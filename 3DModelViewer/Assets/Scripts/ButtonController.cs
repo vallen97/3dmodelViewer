@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class ButtonController : MonoBehaviour
 {
     // variables
+    private Image imgTxtBackground;
+
     // button
     private Button btnModelDesc;
     private Button btnTextF;
@@ -24,7 +26,6 @@ public class ButtonController : MonoBehaviour
     private float speed = .01625f;
 
     // string 
-    //private string[] modelNames = { "model/AncientVase", "model/colorvase", "model/bowl" };
     private string[] modelNames = { "model/Axe Head", "model/bronze ring", "model/kettle", "model/owl", "model/pot", "model/spear" };
 
     // list
@@ -52,7 +53,7 @@ public class ButtonController : MonoBehaviour
         buttons = new List<GameObject>();
 
         Transform canv = GameObject.Find("Canvas").gameObject.transform;
-        float pivotX = -0.5f;
+        float pivotX = -1.075f;
 
         // make buttons
         for (int i = 0; i < 8; i++)
@@ -95,6 +96,9 @@ public class ButtonController : MonoBehaviour
         // find text box
         txtModelDesc = GameObject.Find("txtModelDesc").GetComponent<Text>();
         txtPageNum = GameObject.Find("txtPageNum").GetComponent<Text>();
+
+        // find image
+        imgTxtBackground = GameObject.Find("imgTxtBackground").GetComponent<Image>();
 
         // add listners  
         // model button
@@ -153,6 +157,7 @@ public class ButtonController : MonoBehaviour
 
         // hide text
         txtModelDesc.gameObject.SetActive(false);
+        imgTxtBackground.gameObject.SetActive(false);
 
         // Set model 1 to show when project loads
         ModelChange(0);
@@ -269,6 +274,8 @@ public class ButtonController : MonoBehaviour
     {
         // show text
         txtModelDesc.gameObject.SetActive(true);
+        imgTxtBackground.gameObject.SetActive(true);
+
         // I set up povit points and this is used to animate the button and text 
         while (btnModelDesc.GetComponent<RectTransform>().anchoredPosition.x > -395)
         {
@@ -278,6 +285,7 @@ public class ButtonController : MonoBehaviour
             btnTextF.transform.Translate(Vector3.left * (Time.deltaTime * moveText));
             btnTextB.transform.Translate(Vector3.left * (Time.deltaTime * moveText));
             txtPageNum.transform.Translate(Vector3.left * (Time.deltaTime * moveText));
+            imgTxtBackground.transform.Translate(Vector3.left * (Time.deltaTime * moveText));
             yield return new WaitForSecondsRealtime(speed);
         }
 
@@ -296,11 +304,13 @@ public class ButtonController : MonoBehaviour
             btnTextF.transform.Translate(Vector3.right * (Time.deltaTime * moveText));
             btnTextB.transform.Translate(Vector3.right * (Time.deltaTime * moveText));
             txtPageNum.transform.Translate(Vector3.right * (Time.deltaTime * moveText));
+            imgTxtBackground.transform.Translate(Vector3.right * (Time.deltaTime * moveText));
             yield return new WaitForSecondsRealtime(speed);
         }
 
         // hide text
         txtModelDesc.gameObject.SetActive(false);
+        imgTxtBackground.gameObject.SetActive(false);
         // check position on buttons
         checkInfoPos();
 
