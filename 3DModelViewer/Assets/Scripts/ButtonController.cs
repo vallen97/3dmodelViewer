@@ -7,6 +7,15 @@ public class ButtonController : MonoBehaviour
 {
     // variables
     private Image imgTxtBackground;
+    [SerializeField]
+    private Sprite sprShowDesc;
+    [SerializeField]
+    private Sprite sprHideDesc;
+    [SerializeField]
+    private Sprite sprForwardDesc;
+    [SerializeField]
+    private Sprite sprBackDesc;
+
 
     // button
     private Button btnModelDesc;
@@ -159,6 +168,10 @@ public class ButtonController : MonoBehaviour
         txtModelDesc.gameObject.SetActive(false);
         imgTxtBackground.gameObject.SetActive(false);
 
+        btnModelDesc.GetComponent<Image>().sprite = sprShowDesc;
+        btnTextF.GetComponent<Image>().sprite = sprForwardDesc;
+        btnTextB.GetComponent<Image>().sprite = sprBackDesc;
+
         // Set model 1 to show when project loads
         ModelChange(0);
     }
@@ -197,12 +210,14 @@ public class ButtonController : MonoBehaviour
         // check if text is showing
         if (txtModelDesc.gameObject.activeSelf == false)
         {
+            btnModelDesc.GetComponent<Image>().sprite = sprHideDesc; 
             StartCoroutine("animateBtnTxtShow");
             // mode collider to the left
             this.GetComponent<BoxCollider>().center = new Vector3(-6, 0, 0);
         }
         else
         {
+            btnModelDesc.GetComponent<Image>().sprite = sprShowDesc;
             StartCoroutine("animateBtnTxtHide");
             // move collider back to normal
             this.GetComponent<BoxCollider>().center = new Vector3(0, 0, 0);

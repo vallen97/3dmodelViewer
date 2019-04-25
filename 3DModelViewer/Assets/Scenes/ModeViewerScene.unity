@@ -737,7 +737,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Info
+  m_Text: 
 --- !u!222 &557890455
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1048,6 +1048,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d94a6792f5d1e459a05fdc781a3069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprShowDesc: {fileID: 21300000, guid: 28bb22f0446083f4d99596a64a6fceab, type: 3}
+  sprHideDesc: {fileID: 21300000, guid: cb038d4b9283c9d419aee864a4ef1344, type: 3}
+  sprForwardDesc: {fileID: 21300000, guid: 2bc326f4c91dd8f4ba91d8516b9ec5e3, type: 3}
+  sprBackDesc: {fileID: 21300000, guid: c7431d02d28a13648af13400fe51f38c, type: 3}
   buttonPrefab: {fileID: 1421661279431010725, guid: 0bc9f35a0f2ff7b46b4d82783a97e042,
     type: 3}
 --- !u!1001 &1075390053
@@ -1400,7 +1404,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '>'
+  m_Text: 
 --- !u!222 &1410119293
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1542,7 +1546,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: <
+  m_Text: 
 --- !u!222 &1595136803
 CanvasRenderer:
   m_ObjectHideFlags: 0
