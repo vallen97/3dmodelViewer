@@ -42,23 +42,23 @@ public class ModelController : MonoBehaviour
             // Find the difference in the distances between each frame.
             float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
 
-            //// If the camera is orthographic...
-            //if (camera.isOrthoGraphic)
-            //{
-            //    // ... change the orthographic size based on the change in distance between the touches.
-            //    camera.orthographicSize += deltaMagnitudeDiff * orthoZoomSpeed;
+            // If the camera is orthographic...
+            if (camera.orthographic)
+            {
+                // ... change the orthographic size based on the change in distance between the touches.
+                camera.orthographicSize += deltaMagnitudeDiff * orthoZoomSpeed;
 
-            //    // Make sure the orthographic size never drops below zero.
-            //    camera.orthographicSize = Mathf.Max(camera.orthographicSize, 0.1f);
-            //}
-            //else
-            //{
+                // Make sure the orthographic size never drops below zero.
+                camera.orthographicSize = Mathf.Max(camera.orthographicSize, 0.1f);
+            }
+            else
+            {
                 // Otherwise change the field of view based on the change in distance between the touches.
                 camera.fieldOfView += deltaMagnitudeDiff * perspectiveZoomSpeed;
 
                 // Clamp the field of view to make sure it's between 45 and 90.
                 camera.fieldOfView = Mathf.Clamp(camera.fieldOfView, 45.1f, 89.9f);
-            //}
+            }
         }
     }
 
