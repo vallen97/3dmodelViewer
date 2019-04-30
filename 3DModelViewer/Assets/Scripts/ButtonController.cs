@@ -206,18 +206,15 @@ public class ButtonController : MonoBehaviour
 
     private void DisplayModelDesc()
     {
-
         // check if text is showing
         if (txtModelDesc.gameObject.activeSelf == false)
         {
-            btnModelDesc.GetComponent<Image>().sprite = sprHideDesc; 
             StartCoroutine("animateBtnTxtShow");
             // mode collider to the left
             this.GetComponent<BoxCollider>().center = new Vector3(-6, 0, 0);
         }
         else
         {
-            btnModelDesc.GetComponent<Image>().sprite = sprShowDesc;
             StartCoroutine("animateBtnTxtHide");
             // move collider back to normal
             this.GetComponent<BoxCollider>().center = new Vector3(0, 0, 0);
@@ -287,6 +284,8 @@ public class ButtonController : MonoBehaviour
 
     IEnumerator animateBtnTxtShow()
     {
+        btnModelDesc.GetComponent<Image>().sprite = sprHideDesc;
+
         // show text
         txtModelDesc.gameObject.SetActive(true);
         imgTxtBackground.gameObject.SetActive(true);
@@ -310,6 +309,8 @@ public class ButtonController : MonoBehaviour
 
     IEnumerator animateBtnTxtHide()
     {
+        btnModelDesc.GetComponent<Image>().sprite = sprShowDesc;
+
         // I set up povit points and this is used to animate the button and text 
         while (btnModelDesc.GetComponent<RectTransform>().anchoredPosition.x < 275)
         {
