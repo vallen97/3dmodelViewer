@@ -11,6 +11,18 @@ public class ModelController : MonoBehaviour
     public float perspectiveZoomSpeed = 0.5f;        // The rate of change of the field of view in perspective mode.
     public float orthoZoomSpeed = 0.5f;        // The rate of change of the orthographic size in orthographic mode.
 
+    // NOTE: camera.orthographicSize is the max, currently is at 5
+    //       Located under mainCamera, camera, size
+    
+    // The is the min zoom or how close to the object
+    private float cameraOrthoMin = 2.0f;
+
+    // if using perspective and is in degress
+    // min will make objects closer 
+    private float cameraPerspMin = 45.1f;
+    // max is how far the object will apear
+    private float cameraPerspMax = 89.9f;
+
     private Camera camera;
     // Start is called before the first frame update
     void Start()
@@ -49,7 +61,7 @@ public class ModelController : MonoBehaviour
                 camera.orthographicSize += deltaMagnitudeDiff * orthoZoomSpeed;
 
                 // Make sure the orthographic size never drops below zero.
-                camera.orthographicSize = Mathf.Max(camera.orthographicSize, 0.1f);
+                camera.orthographicSize = Mathf.Max(camera.orthographicSize, cameraOrthoMin);
             }
             else
             {
@@ -57,7 +69,7 @@ public class ModelController : MonoBehaviour
                 camera.fieldOfView += deltaMagnitudeDiff * perspectiveZoomSpeed;
 
                 // Clamp the field of view to make sure it's between 45 and 90.
-                camera.fieldOfView = Mathf.Clamp(camera.fieldOfView, 45.1f, 89.9f);
+                camera.fieldOfView = Mathf.Clamp(camera.fieldOfView, cameraPerspMin, cameraPerspMax);
             }
         }
     }
