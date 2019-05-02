@@ -78,7 +78,13 @@ public class ButtonController : MonoBehaviour
             // set scale
             buttons[i].transform.localScale = new Vector3(1, 1, 1);
             // set position when using pivot points
-            buttons[i].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0, 0);
+            buttons[i].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0, -2000);
+            // https://forum.unity.com/threads/setting-pos-z-in-recttransform-via-scripting.270230/
+            buttons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+            buttons[i].GetComponent<RectTransform>().localPosition =
+                 new Vector3(buttons[i].GetComponent<RectTransform>().localPosition.x,
+                             buttons[i].GetComponent<RectTransform>().localPosition.y,
+                             -2000);
             // set pivot
             buttons[i].GetComponent<RectTransform>().pivot = new Vector2(pivotX, 1.5f);
             // move button to the right
@@ -182,6 +188,7 @@ public class ButtonController : MonoBehaviour
     // changes model from onclickllistner from button
     private void ModelChange(int modelNumber)
     {
+        GameObject.Find("ModelController").GetComponent<ModelController>().camera.orthographicSize = 5;
         // set name for active model for setting text
         activeModel = modelNumber;
 

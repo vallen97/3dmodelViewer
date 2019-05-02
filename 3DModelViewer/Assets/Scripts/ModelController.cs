@@ -8,14 +8,14 @@ public class ModelController : MonoBehaviour
 
     private ButtonController bc;
 
-    public float perspectiveZoomSpeed = 0.5f;        // The rate of change of the field of view in perspective mode.
-    public float orthoZoomSpeed = 0.5f;        // The rate of change of the orthographic size in orthographic mode.
+    public float perspectiveZoomSpeed = 0.3f;        // The rate of change of the field of view in perspective mode.
+    public float orthoZoomSpeed = 0.3f;        // The rate of change of the orthographic size in orthographic mode.
 
     // NOTE: camera.orthographicSize is the max, currently is at 5
     //       Located under mainCamera, camera, size
     
     // The is the min zoom or how close to the object
-    private float cameraOrthoMin = 2.0f;
+    private float cameraOrthoMin = 2.5f;
 
     // if using perspective and is in degress
     // min will make objects closer 
@@ -23,13 +23,14 @@ public class ModelController : MonoBehaviour
     // max is how far the object will apear
     private float cameraPerspMax = 89.9f;
 
-    private Camera camera;
+    public Camera camera;
     // Start is called before the first frame update
     void Start()
     {
         go = GameObject.Find("model");
         bc = GameObject.Find("ModelController").GetComponent<ButtonController>();
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        camera.orthographicSize = 5;
     }
 
     // Update is called once per frame
