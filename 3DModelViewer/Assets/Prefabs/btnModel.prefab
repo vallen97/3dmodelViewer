@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1421661279431010730}
   - component: {fileID: 1421661279431010731}
   m_Layer: 5
-  m_Name: btnModel1
+  m_Name: btnModel
   m_TagString: buttonModel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -207,4 +207,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: IMAGE 1
+  m_Text: 
