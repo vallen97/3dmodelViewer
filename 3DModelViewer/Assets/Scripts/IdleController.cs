@@ -8,9 +8,7 @@ public class IdleController : MonoBehaviour
     private GameObject go;
 
     // String 
-    //private string[] modelNames = { "model/vase", "model/tulipany", "model/bowl" };
-    private string[] modelNames = { "model/Axe Head", "model/bronze ring", "model/kettle", "model/owl", "model/pot", "model/spear" };
-
+    private string[] modelNames = { "model/21370.11", "model/21393.11", "model/Axe Head", "model/LateGlazeBowl Touchup", "model/pot 2 blender", "model/Pot1Blender_", "model/Pot2Blender_" };
 
     // get model
     private List<GameObject> models;
