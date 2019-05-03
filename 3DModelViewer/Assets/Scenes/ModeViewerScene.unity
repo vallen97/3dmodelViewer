@@ -1175,8 +1175,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 7c8e3d67d0a519f43a961740c06720d1, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1267,9 +1267,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprShowDesc: {fileID: 21300000, guid: 83c3f11343dfc8a4ba9ee5a2f83215fc, type: 3}
   sprHideDesc: {fileID: 21300000, guid: 71dd69656e1835c4eb47804faf0e35b4, type: 3}
-  sprForwardDesc: {fileID: 21300000, guid: 3ef88297d5f74ef4c9aafd660c56182f, type: 3}
-  sprBackDesc: {fileID: 21300000, guid: 7c8e3d67d0a519f43a961740c06720d1, type: 3}
-  sprCredits: {fileID: 21300000, guid: baa56693d7591d84ba70ed45f56a551c, type: 3}
   buttonPrefab: {fileID: 1421661279431010725, guid: 0bc9f35a0f2ff7b46b4d82783a97e042,
     type: 3}
   btn1: {fileID: 21300000, guid: ace2e6d7755f6784fb7f1ca40554e4b2, type: 3}
@@ -1280,8 +1277,6 @@ MonoBehaviour:
   btn6: {fileID: 21300000, guid: b334fd3e4bed26747b6aaa81bf9fdfc5, type: 3}
   btn7: {fileID: 21300000, guid: 0c59b85fe6e98114dab5fa1f762fdf49, type: 3}
   btn8: {fileID: 0}
-  Georgia: {fileID: 0}
-  PTS: {fileID: 12800000, guid: bebb868e552b542419ca3f00e51f3bfa, type: 3}
 --- !u!1001 &1023071455
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1549,8 +1544,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 3ef88297d5f74ef4c9aafd660c56182f, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

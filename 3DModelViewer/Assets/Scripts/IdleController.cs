@@ -7,10 +7,10 @@ public class IdleController : MonoBehaviour
     // gameObject for model
     private GameObject go;
 
-    // String 
+    // String model names
     private string[] modelNames = { "model/21370.11", "model/21393.11", "model/Axe Head", "model/LateGlazeBowl Touchup", "model/pot 2 blender", "model/Pot1Blender_", "model/Pot2Blender_" };
 
-    // get model
+    // get models
     private List<GameObject> models;
 
     // Start is called before the first frame update
@@ -21,7 +21,6 @@ public class IdleController : MonoBehaviour
         // instanciate list
         models = new List<GameObject>();
 
-
         // loop to tind and hide all models
         for (int i = 0; i < modelNames.Length; i++)
         {
@@ -29,7 +28,7 @@ public class IdleController : MonoBehaviour
             models[i].SetActive(false);
         }
 
-
+        // pick random model
         int rndModel = Random.Range(0, models.Count);
         models[rndModel].SetActive(true);
 

@@ -66,7 +66,7 @@
     <Compile Include="Assets\Scripts\ModelController.cs" />
     <Compile Include="Assets\Scripts\ScreenResolutionController.cs" />
     <Compile Include="Assets\Scripts\TimeourController.cs" />
-    <None Include="Assets\Images\Icon_Buttons\icons Report.txt" />
+    <None Include="Assets\Images\Text Fonts\icons Report.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/Vaughn/Highlands/SSD Practicum 2/Unity Projects/3DModelViewer/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

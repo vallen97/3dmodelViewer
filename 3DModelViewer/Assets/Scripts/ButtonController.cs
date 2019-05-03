@@ -6,17 +6,16 @@ using UnityEngine.UI;
 public class ButtonController : MonoBehaviour
 {
     // variables
+    // image
     private Image imgTxtBackground;
+
+    // sprite
+    // change between the images
     [SerializeField]
     private Sprite sprShowDesc;
     [SerializeField]
     private Sprite sprHideDesc;
-    [SerializeField]
-    private Sprite sprForwardDesc;
-    [SerializeField]
-    private Sprite sprBackDesc;
-    [SerializeField]
-    private Sprite sprCredits;
+
 
     // button
     private Button btnModelDesc;
@@ -25,35 +24,39 @@ public class ButtonController : MonoBehaviour
     private Button btnCredits;
 
     // text
-    private Text txtModelDesc;
-    private Text txtPageNum;
+    private Text txtModelDesc;   // model description text
+    private Text txtPageNum;     // page number
 
     // int
-    private int activeModel = 100;
-    private int infoPos = 0;
-    private int moveText = 10;
+    private int activeModel = 100;  // changed when new models are selected 
+    private int infoPos = 0;        // current page
+    private int moveText = 10;      // speed when showing model description
+    private int defaultZoom = 5;    // camera zoom currrently 5
 
     // float
-    private float speed = .01625f;
+    // NOTE: in seconds
+    private float speed = .01625f; // how frequent to move text 
 
     // string 
+    // model names model gameobject and model
     private string[] modelNames = { "model/21370.11", "model/21393.11", "model/Axe Head", "model/LateGlazeBowl Touchup", "model/pot 2 blender", "model/Pot1Blender_", "model/Pot2Blender_" };
+    // credits
     private static string credits = "Credits: \nVaughn Allen\n";
 
     // list
-    private List<GameObject> models;
-    private List<Button> modelButtons;
-    private List<string[]> modelDesc;
-    private List<GameObject> buttons;
-    private List<Sprite> buttonImages;
+    private List<GameObject> models;    // list of allmodels
+    private List<GameObject> buttons;   // create buttons for model buttons
+    private List<Button> modelButtons;  // list of all model buttons
+    private List<string[]> modelDesc;   // list of all model descriptions
+    private List<Sprite> buttonImages;  // sprites for button images
 
     // gameObject
-    // model
-    private GameObject go;
-    // button prefab
+    private GameObject go;              // model gameobject
     [SerializeField]
-    private GameObject buttonPrefab;
+    private GameObject buttonPrefab;    // button prefab for models
 
+    // sprite
+    // for button models
     [SerializeField]
     private Sprite btn1;
     [SerializeField]
@@ -71,16 +74,11 @@ public class ButtonController : MonoBehaviour
     [SerializeField]
     private Sprite btn8;
 
-    [SerializeField]
-    private Font Georgia;
-    [SerializeField]
-    private Font PTS;
-
 
     // Start is called before the first frame update
     void Start()
     {
-
+        // find model gameobject
         go = GameObject.Find("model");
 
         // instanciate list
@@ -90,6 +88,7 @@ public class ButtonController : MonoBehaviour
         buttons = new List<GameObject>();
         buttonImages = new List<Sprite>();
 
+        // add sprites to list
         buttonImages.Add(btn1);
         buttonImages.Add(btn2);
         buttonImages.Add(btn3);
@@ -98,18 +97,19 @@ public class ButtonController : MonoBehaviour
         buttonImages.Add(btn6);
         buttonImages.Add(btn7);
 
+        // find canvas
         Transform canv = GameObject.Find("Canvas").gameObject.transform;
+
+        // set pivot point
         float pivotX = -1.075f;
 
         // make buttons
         for (int i = 0; i < 8; i++)
         {
-            // make buttom
+            // make button
             buttons.Add((GameObject)Instantiate(buttonPrefab, transform));
             // set button name
             buttons[i].gameObject.name = "btnModel" + (i + 1);
-            // set button tag
-            //buttons[i].gameObject.tag = "" + i;
             // set parent
             buttons[i].transform.SetParent(canv, false);
             // set scale
@@ -117,6 +117,7 @@ public class ButtonController : MonoBehaviour
             // set position when using pivot points
             buttons[i].GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 0, -2000);
             // https://forum.unity.com/threads/setting-pos-z-in-recttransform-via-scripting.270230/
+            // move button on z axis, so buttons aren't behind the model
             buttons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
             buttons[i].GetComponent<RectTransform>().localPosition =
                  new Vector3(buttons[i].GetComponent<RectTransform>().localPosition.x,
@@ -129,11 +130,12 @@ public class ButtonController : MonoBehaviour
             {
                 // set images
                 buttons[i].GetComponent<Image>().sprite = buttonImages[i];
-            }// move button to the right
+            }
+            // move button to the right
             pivotX -= 1.5f;
         }
 
-        // loop to tind and hide all models
+        // loop to find and hide all models
         for (int i = 0; i < modelNames.Length; i++)
         {
             models.Add(GameObject.Find(modelNames[i]));
@@ -168,10 +170,11 @@ public class ButtonController : MonoBehaviour
         modelButtons[5].onClick.AddListener(() => ModelChange(5));
         modelButtons[6].onClick.AddListener(() => ModelChange(6));
         //modelButtons[7].onClick.AddListener(() => ModelChange(7));
+
+        // hide button wo aren't using
         modelButtons[7].gameObject.SetActive(false);
 
         // info button
-        //btnModelDesc.onClick.AddListener(DisplayModelDesc);
         btnModelDesc.onClick.AddListener(() => DisplayModelDesc());
 
         // page button
@@ -183,6 +186,7 @@ public class ButtonController : MonoBehaviour
 
         // Set model descriptions into list
         // NOTE: adding a new string ie "new", "line", line will be on a the next page
+        // more about formatting text using HTML: https://docs.unity3d.com/Manual/StyledText.html
         modelDesc.Add(new string[]{
             "<b>Small Jar</b>\n<i>Jemez Black-on-white</i>\nAD 1300-1750\n\nThis jar was likely used as a canteen. It was excavated from the nearby ancient Jemez village of Unshagi. Two sparrows can be seen on each side of the vessel. There is also a hole drilled near the mouth which was probably used for a carrying cord."
         });
@@ -212,15 +216,14 @@ public class ButtonController : MonoBehaviour
             "<b>Miniature Canteen</b>\n<i>Jemez Black-on-white</i>\nAD 1600-1700\n\nThis miniature canteen was found on the floor of a room here in the village of Giusewa. It was excavated in 2019 and appears to still have materials inside. These will be tested to reveal the canteen’s contents. Notice the detailed quartered-designs on the face of the vessel."
         });
 
-        // hide text
+        // hide UI elements
         txtModelDesc.gameObject.SetActive(false);
         imgTxtBackground.gameObject.SetActive(false);
         btnTextF.gameObject.SetActive(false);
         btnTextB.gameObject.SetActive(false);
 
+        // set sprite imaage
         btnModelDesc.GetComponent<Image>().sprite = sprShowDesc;
-        btnTextF.GetComponent<Image>().sprite = sprForwardDesc;
-        btnTextB.GetComponent<Image>().sprite = sprBackDesc;
 
         // Set model 1 to show when project loads
         ModelChange(0);
@@ -229,7 +232,8 @@ public class ButtonController : MonoBehaviour
     // changes model from onclickllistner from button
     private void ModelChange(int modelNumber)
     {
-        GameObject.Find("ModelController").GetComponent<ModelController>().camera.orthographicSize = 5;
+        // change soom back to default
+        GameObject.Find("ModelController").GetComponent<ModelController>().camera.orthographicSize = defaultZoom;
         // set name for active model for setting text
         activeModel = modelNumber;
 
@@ -257,21 +261,20 @@ public class ButtonController : MonoBehaviour
 
     private void DisplayModelDesc()
     {
-        // check if text is showing
-        if (txtModelDesc.gameObject.activeSelf == false)
+        if (txtModelDesc.gameObject.activeSelf == false)        // if text is not showing
         {
             StartCoroutine("animateBtnTxtShow");
         }
-        else if (txtModelDesc.gameObject.activeSelf == true)
+        else if (txtModelDesc.gameObject.activeSelf == true)    // if text is showing
         {
-            if (txtModelDesc.text == credits)
+            if (txtModelDesc.text == credits)   // if text showing is credits
             {
-                txtModelDesc.text = modelDesc[activeModel][infoPos];
-                btnModelDesc.GetComponent<Image>().sprite = sprHideDesc;
+                txtModelDesc.text = modelDesc[activeModel][infoPos];        // change back to model description
+                btnModelDesc.GetComponent<Image>().sprite = sprHideDesc;    // change 
             }
-            else
+            else  // if text is not credits
             {
-                StartCoroutine("animateBtnTxtHide");
+                StartCoroutine("animateBtnTxtHide"); // hide text
             }
         }
 
@@ -281,33 +284,32 @@ public class ButtonController : MonoBehaviour
 
     private void DisplayCredits()
     {
-        // check if text is showing
-        if (txtModelDesc.gameObject.activeSelf == false)
+        if (txtModelDesc.gameObject.activeSelf == false)        // if text is not showing
         {
-            txtModelDesc.text = credits;
-            StartCoroutine("animateBtnTxtShow");
+            txtModelDesc.text = credits;            // change text to credits 
+            StartCoroutine("animateBtnTxtShow");    // show text
         }
-        else if (txtModelDesc.gameObject.activeSelf == true)
+        else if (txtModelDesc.gameObject.activeSelf == true)    // if text is showing
         {
-
-            if(txtModelDesc.text != credits)
+            if (txtModelDesc.text != credits)   // if text is not credits
             {
-                txtModelDesc.text = credits;
-                btnModelDesc.GetComponent<Image>().sprite = sprShowDesc;
+                txtModelDesc.text = credits; // change text to credits
+                btnModelDesc.GetComponent<Image>().sprite = sprShowDesc; // change sprite to info
             }
-            else
+            else  // if text is credits
             {
-                StartCoroutine("animateBtnTxtHide");
+                StartCoroutine("animateBtnTxtHide");    // hide text
             }
         }
     }
 
-
+    // called from modelController
     public void CloseTextBox()
     {
-        StartCoroutine("animateBtnTxtHide");
+        StartCoroutine("animateBtnTxtHide");    // hide description
     }
 
+    // change page
     private void ChangeText(int dir)
     {
         // check which button was pressed
@@ -341,34 +343,36 @@ public class ButtonController : MonoBehaviour
         btnTextF.interactable = true;
         btnTextB.interactable = true;
 
-        // check position
-        if (infoPos >= modelDesc[activeModel].Length - 1)
+        if (infoPos >= modelDesc[activeModel].Length - 1) // if page is to the most right
         {
-            btnTextF.interactable = false;
+            btnTextF.interactable = false;  // disable forward button
         }
-        else if (infoPos <= 0)
+        else if (infoPos <= 0)  // if button is most left
         {
-            btnTextB.interactable = false;
+            btnTextB.interactable = false;  // disable backwards button
         }
 
+        // if there is only one paGe
         if (modelDesc[activeModel].Length == 1)
         {
+            // both buttons are disable
             btnTextF.interactable = false;
             btnTextB.interactable = false;
         }
-
+        // show current page of total
         txtPageNum.text = "" + (infoPos + 1) + "/" + modelDesc[activeModel].Length;
     }
 
 
     IEnumerator animateBtnTxtShow()
     {
+        // set sprite to close
         btnModelDesc.GetComponent<Image>().sprite = sprHideDesc;
 
         // mode collider to the left
         this.GetComponent<BoxCollider>().center = new Vector3(-4, 0, 0);
 
-        // show text
+        // show description
         txtModelDesc.gameObject.SetActive(true);
         imgTxtBackground.gameObject.SetActive(true);
         btnTextF.gameObject.SetActive(true);
@@ -394,6 +398,7 @@ public class ButtonController : MonoBehaviour
 
     IEnumerator animateBtnTxtHide()
     {
+        // change button sprite to info
         btnModelDesc.GetComponent<Image>().sprite = sprShowDesc;
 
         // I set up povit points and this is used to animate the button and text 
@@ -409,7 +414,7 @@ public class ButtonController : MonoBehaviour
             yield return new WaitForSecondsRealtime(speed);
         }
 
-        // hide text
+        // hide description
         txtModelDesc.gameObject.SetActive(false);
         imgTxtBackground.gameObject.SetActive(false);
         btnTextF.gameObject.SetActive(false);

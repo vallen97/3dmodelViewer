@@ -77,22 +77,26 @@ public class ModelController : MonoBehaviour
 
     void OnMouseDown()
     {
+        // close description
         bc.CloseTextBox();
     }
 
 
     void OnMouseDrag()
     {
+        // float 
         float diffX;
         float diffY;
 
+        // get difference from last mouse position with new mouse position
         diffX = lastPosX - Input.mousePosition.x;
         diffY = lastPosY - Input.mousePosition.y;
 
+        // rotate model
         go.transform.Rotate(Vector3.up, diffX);
         go.transform.Rotate(Vector3.right, diffY);
 
-
+        // store new position
         lastPosX = Input.mousePosition.x;
         lastPosY = Input.mousePosition.y;
     }
