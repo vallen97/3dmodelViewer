@@ -15,12 +15,14 @@ public class ButtonController : MonoBehaviour
     private Sprite sprForwardDesc;
     [SerializeField]
     private Sprite sprBackDesc;
-
+    [SerializeField]
+    private Sprite sprCredits;
 
     // button
     private Button btnModelDesc;
     private Button btnTextF;
     private Button btnTextB;
+    private Button btnCredits;
 
     // text
     private Text txtModelDesc;
@@ -35,13 +37,15 @@ public class ButtonController : MonoBehaviour
     private float speed = .01625f;
 
     // string 
-    private string[] modelNames = { "model/Axe Head", "model/bronze ring", "model/kettle", "model/owl", "model/pot", "model/spear" };
+    private string[] modelNames = { "model/21370.11", "model/21393.11", "model/Axe Head", "model/LateGlazeBowl Touchup", "model/pot 2 blender", "model/Pot1Blender_", "model/Pot2Blender_" };
+    private static string credits = "Credits: \nVaughn Allen\n";
 
     // list
     private List<GameObject> models;
     private List<Button> modelButtons;
     private List<string[]> modelDesc;
     private List<GameObject> buttons;
+    private List<Sprite> buttonImages;
 
     // gameObject
     // model
@@ -50,9 +54,33 @@ public class ButtonController : MonoBehaviour
     [SerializeField]
     private GameObject buttonPrefab;
 
+    [SerializeField]
+    private Sprite btn1;
+    [SerializeField]
+    private Sprite btn2;
+    [SerializeField]
+    private Sprite btn3;
+    [SerializeField]
+    private Sprite btn4;
+    [SerializeField]
+    private Sprite btn5;
+    [SerializeField]
+    private Sprite btn6;
+    [SerializeField]
+    private Sprite btn7;
+    [SerializeField]
+    private Sprite btn8;
+
+    [SerializeField]
+    private Font Georgia;
+    [SerializeField]
+    private Font PTS;
+
+
     // Start is called before the first frame update
     void Start()
     {
+
         go = GameObject.Find("model");
 
         // instanciate list
@@ -60,6 +88,15 @@ public class ButtonController : MonoBehaviour
         modelButtons = new List<Button>();
         modelDesc = new List<string[]>();
         buttons = new List<GameObject>();
+        buttonImages = new List<Sprite>();
+
+        buttonImages.Add(btn1);
+        buttonImages.Add(btn2);
+        buttonImages.Add(btn3);
+        buttonImages.Add(btn4);
+        buttonImages.Add(btn5);
+        buttonImages.Add(btn6);
+        buttonImages.Add(btn7);
 
         Transform canv = GameObject.Find("Canvas").gameObject.transform;
         float pivotX = -1.075f;
@@ -87,7 +124,12 @@ public class ButtonController : MonoBehaviour
                              -2000);
             // set pivot
             buttons[i].GetComponent<RectTransform>().pivot = new Vector2(pivotX, 1.5f);
-            // move button to the right
+
+            if (i < buttonImages.Count)
+            {
+                // set images
+                buttons[i].GetComponent<Image>().sprite = buttonImages[i];
+            }// move button to the right
             pivotX -= 1.5f;
         }
 
@@ -107,6 +149,7 @@ public class ButtonController : MonoBehaviour
         btnModelDesc = GameObject.Find("btnModelDesc").GetComponent<Button>();
         btnTextF = GameObject.Find("btnTextF").GetComponent<Button>();
         btnTextB = GameObject.Find("btnTextB").GetComponent<Button>();
+        btnCredits = GameObject.Find("btnCredits").GetComponent<Button>();
 
         // find text box
         txtModelDesc = GameObject.Find("txtModelDesc").GetComponent<Text>();
@@ -120,12 +163,12 @@ public class ButtonController : MonoBehaviour
         modelButtons[0].onClick.AddListener(() => ModelChange(0));
         modelButtons[1].onClick.AddListener(() => ModelChange(1));
         modelButtons[2].onClick.AddListener(() => ModelChange(2));
-        // NOTE: Currently does not have any information
         modelButtons[3].onClick.AddListener(() => ModelChange(3));
         modelButtons[4].onClick.AddListener(() => ModelChange(4));
         modelButtons[5].onClick.AddListener(() => ModelChange(5));
-        //modelButtons[6].onClick.AddListener(() => ModelChange(6));
+        modelButtons[6].onClick.AddListener(() => ModelChange(6));
         //modelButtons[7].onClick.AddListener(() => ModelChange(7));
+        modelButtons[7].gameObject.SetActive(false);
 
         // info button
         //btnModelDesc.onClick.AddListener(DisplayModelDesc);
@@ -135,40 +178,38 @@ public class ButtonController : MonoBehaviour
         btnTextF.onClick.AddListener(() => ChangeText(1));
         btnTextB.onClick.AddListener(() => ChangeText(0));
 
+        // credits button
+        btnCredits.onClick.AddListener(() => DisplayCredits());
 
         // Set model descriptions into list
+        // NOTE: adding a new string ie "new", "line", line will be on a the next page
+        modelDesc.Add(new string[]{
+            "<b>Small Jar</b>\n<i>Jemez Black-on-white</i>\nAD 1300-1750\n\nThis jar was likely used as a canteen. It was excavated from the nearby ancient Jemez village of Unshagi. Two sparrows can be seen on each side of the vessel. There is also a hole drilled near the mouth which was probably used for a carrying cord."
+        });
+
         modelDesc.Add(new string[] {
-            "What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,",
-            "but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+            "<b>Stepped Bowl</b>\n<i>Jemez Black-on-white</i>\nAD 1300-1750\n\nThis partially restored bowl was excavated from a nearby ancient Jemez village. Notice the repeating stairstep motifs all over this vessel. It was common in the early 1900s for archaeologists to “repair” or “recreate” missing portions of pottery.Can you identify where the early",
+            "archaeologists added to this vessel?"
+            });
+
+        modelDesc.Add(new string[]{
+            "<b>Metal Axe</b>\n<i>Steel</i>\nAD 1700-1800\n\nBefore the arrival of the Spanish, most pueblo tools were made of wood, ceramic, stone, and bone. The introduction of metal tools changed the way people in the village of Giusewa lived. It takes half of the time to chop down a tree with a metal axe compared to a stone axe.7"
         });
 
         modelDesc.Add(new string[] {
-            "Where does it come from?Contrary to popular belief, Lorem Ipsum is not simply random text.It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.Richard McClintock, a Latin professor at Hampden - Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in",
-            "classical literature, discovered the undoubtable source.Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum(The Extremes of Good and Evil) by Cicero, written in 45 BC.This book is a treatise on the theory of ethics, very popular during the Renaissance.The first line of Lorem Ipsum, Lorem ipsum dolor sit amet., comes from a line in section 1.10. Lorem ipsum dolor",
-            "sit amet, consectetur adipiscing elit. Etiam sed lacus eget mauris varius fringilla. Ut id massa efficitur, accumsan quam eu, lobortis turpis. Nulla sollicitudin risus non felis euismod ultricies. Sed vitae libero at libero laoreet tincidunt. Nam eu ultricies arcu. Cras nec nunc risus. Donec nec sodales enim. Nunc imperdiet, quam quis feugiat semper, elit ligula imperdiet velit, vel tincidunt",
-            "purus turpis vitae enim. In placerat rutrum diam nec ultrices. Nam eu placerat purus, at sollicitudin risus. Curabitur viverra augue sed diam interdum, interdum imperdiet ipsum interdum. Quisque sapien sem, eleifend at quam nec, auctor sodales lorem.32"
+            "<b>Trade Bowl</b>\n<i>Rio Grande Glazeware</i>\nAD 1515-1750\n\nWhile most of the pottery found at the ancient village of Giusewa is Jemez Black-on-white, recent excavations have revealed a large amount of Rio Grande Glazeware. These colorful pieces of pottery were made in the ancestral villages of Zia and Tamaya, and traded into the Jemez Valley."
         });
 
         modelDesc.Add(new string[]{
-            "Where can I get some? There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.",
-            "All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures,",
-            "to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc."
+            "<b>Shipping Jar</b>\n<i>Andalusian Utilitywear</i>\nAD 1580-1850\n\nThese large egg-shaped jars were produced in Spain, filled with goods, then transported to the North American Colonies. Jars of this shape typically held wine, olive oil, olives. Once the contents of the jars were depleted, they were reused as storage jars for a variety of products made in the New World."
         });
 
         modelDesc.Add(new string[]{
-            "MODEL 4"
+            "<b>Cooking Pot</b>\n<i>Jemez Utilitywear<i>\nAD 1300-1850\n\nMore than half of the pottery excavated from Giusewa Pueblo were fragments of grey and black Utilitywear. These vessels were used for cooking and storing food.It was an effective form of pottery, so it changed very little over the course of several hundred years."
         });
 
         modelDesc.Add(new string[]{
-            "MODEL 5"
-        });
-
-        modelDesc.Add(new string[]{
-            "MODEL 6"
-        });
-
-        modelDesc.Add(new string[]{
-            "MODEL 7"
+            "<b>Miniature Canteen</b>\n<i>Jemez Black-on-white</i>\nAD 1600-1700\n\nThis miniature canteen was found on the floor of a room here in the village of Giusewa. It was excavated in 2019 and appears to still have materials inside. These will be tested to reveal the canteen’s contents. Notice the detailed quartered-designs on the face of the vessel."
         });
 
         // hide text
@@ -216,22 +257,51 @@ public class ButtonController : MonoBehaviour
 
     private void DisplayModelDesc()
     {
-        Debug.Log("INSIDE");
         // check if text is showing
         if (txtModelDesc.gameObject.activeSelf == false)
         {
             StartCoroutine("animateBtnTxtShow");
-
         }
         else if (txtModelDesc.gameObject.activeSelf == true)
         {
-            StartCoroutine("animateBtnTxtHide");
-
+            if (txtModelDesc.text == credits)
+            {
+                txtModelDesc.text = modelDesc[activeModel][infoPos];
+                btnModelDesc.GetComponent<Image>().sprite = sprHideDesc;
+            }
+            else
+            {
+                StartCoroutine("animateBtnTxtHide");
+            }
         }
 
         // which button was pressed and asign model text
         txtModelDesc.text = modelDesc[activeModel][infoPos];
     }
+
+    private void DisplayCredits()
+    {
+        // check if text is showing
+        if (txtModelDesc.gameObject.activeSelf == false)
+        {
+            txtModelDesc.text = credits;
+            StartCoroutine("animateBtnTxtShow");
+        }
+        else if (txtModelDesc.gameObject.activeSelf == true)
+        {
+
+            if(txtModelDesc.text != credits)
+            {
+                txtModelDesc.text = credits;
+                btnModelDesc.GetComponent<Image>().sprite = sprShowDesc;
+            }
+            else
+            {
+                StartCoroutine("animateBtnTxtHide");
+            }
+        }
+    }
+
 
     public void CloseTextBox()
     {
